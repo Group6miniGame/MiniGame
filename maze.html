@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maze Puzzle Game</title>
+  <style>
+    /* Global page styling */
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #fafafa;
+      text-align: center;
+      padding: 50px;
+      color: #333;
+      margin: 0;
+    }
+
+    h1 {
+      color: #1e3a8a; /* Dark Blue */
+      font-size: 3.5em;
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+
+    .maze-container {
+      margin-top: 30px;
+      display: inline-block;
+      text-align: left;
+      box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+    }
+
+    .maze {
+      display: grid;
+      grid-template-columns: repeat(10, 30px);
+      grid-template-rows: repeat(10, 30px);
+      gap: 2px;
+      border: 2px solid #4CAF50;
+      margin: 0 auto;
+      padding: 10px;
+      background-color: #ffffff;
+      border-radius: 8px;
+    }
+
+    .cell {
+      width: 30px;
+      height: 30px;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .wall {
+      background-color: #333;
+    }
+
+    .start {
+      background-color: #4CAF50; /* Green */
+    }
+
+    .end {
+      background-color: #FF5733; /* Red */
+    }
+
+    .player {
+      background-color: #1e40af; /* Blue */
+      border-radius: 50%;
+    }
+
+    button {
+      font-size: 1.2em;
+      background-color: #1e3a8a;
+      color: white;
+      padding: 15px 30px;
+      border: none;
+      cursor: pointer;
+      border-radius: 8px;
+      margin-top: 20px;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #4CAF50;
+    }
+
+    /* Responsive styling */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.5em;
+      }
+
+      .maze {
+        grid-template-columns: repeat(8, 30px);
+        grid-template-rows: repeat(8, 30px);
+      }
+
+      button {
+        font-size: 1em;
+        padding: 12px 24px;
+      }
+    }
+
+    /* Styling for when the player wins */
+    .won-message {
+      font-size: 2em;
+      color: #4CAF50;
+      margin-top: 20px;
+    }
+  </style>
+  <script>
+    const maze = [
+      ['S', '0', '0', '0', 'W', '0', '0', '0', '0', 'W'],
+      ['W', 'W', 'W', '0', 'W', 'W', 'W', '0', '0', 'W'],
+      ['W', '0', 'W', '0', 'W', '0', 'W', '0', '0', 'W'],
+      ['W', '0', 'W', '0', 'W', '0', 'W', 'W', '0', 'W'],
+      ['W', '0', 'W', '0', 'W', '0', '0', '0', '0', 'W'],
+      ['W', '0', 'W', '0', '0', '0', 'W', 'W', '0', 'W'],
+      ['W', '0', 'W', '0', 'W', '0', 'W', '0', '0', 'W'],
+      ['W', '0', 'W', '0', 'W', '0', 'W', '0', '0', 'W'],
+      ['W', 'W', 'W', '0', 'W', '0', 'W', '0', 'E', 'W'],
+      ['W', 'W', 'O', 'W', 'W', 'W', 'W', 'W', 'W', 'W'],
+    ];
+
+    let playerPosition = { x: 0, y: 0 };
+    let gameWon = false;
+
+    function drawMaze() {
+      const mazeContainer = document.getElementById('maze');
+      mazeContainer.innerHTML = '';
+      for (let y = 0; y < maze.length; y++) {
+        for (let x = 0; x < maze[y].length; x++) {
+          const cell = document.createElement('div');
+          cell.classList.add('cell');
+          
+          if (maze[y][x] === 'W') {
+            cell.classList.add('wall');
+          } else if (maze[y][x] === 'S') {
+            cell.classList.add('start');
+          } else if (maze[y][x] === 'E') {
+            cell.classList.add('end');
+          }
+
+          if (playerPosition.x === x && playerPosition.y === y) {
+            cell.classList.add('player');
+          }
+
+          mazeContainer.appendChild(cell);
+        }
+      }
+    }
+
+    function movePlayer(direction) {
+      if (gameWon) return;
+
+      let newPosition = { ...playerPosition };
+
+      switch (direction) {
+        case 'up':
+          newPosition.y--;
+          break;
+        case 'down':
+          newPosition.y++;
+          break;
+        case 'left':
+          newPosition.x--;
+          break;
+        case 'right':
+          newPosition.x++;
+          break;
+      }
+
+      // Check if the new position is within bounds and not a wall
+      if (
+        newPosition.x >= 0 && newPosition.x < maze[0].length &&
+        newPosition.y >= 0 && newPosition.y < maze.length &&
+        maze[newPosition.y][newPosition.x] !== 'W'
+      ) {
+        playerPosition = newPosition;
+
+        // Check if player reached the end
+        if (maze[playerPosition.y][playerPosition.x] === 'E') {
+          alert('Congratulations! You reached the end!');
+          gameWon = true;
+          document.getElementById('maze').insertAdjacentHTML('afterend', '<div class="won-message">You won the game!</div>');
+        }
+      }
+
+      drawMaze();
+    }
+
+    // Keyboard controls
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowUp') {
+        movePlayer('up');
+      } else if (e.key === 'ArrowDown') {
+        movePlayer('down');
+      } else if (e.key === 'ArrowLeft') {
+        movePlayer('left');
+      } else if (e.key === 'ArrowRight') {
+        movePlayer('right');
+      }
+    });
+
+    window.onload = () => {
+      drawMaze();
+    };
+  </script>
+</head>
+
+<body>
+  <h1>Maze Puzzle Game</h1>
+  <div id="maze" class="maze"></div>
+  <button onclick="window.location.href='index.html'">Back to Home</button>
+</body>
+
+</html>

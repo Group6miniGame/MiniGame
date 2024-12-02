@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Scramble Game</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #a1c4fd, #c2e9fb); /* Light blue gradient */
+            text-align: center;
+            padding: 50px;
+            color: #333;
+        }
+
+        h1 {
+            color: #4a90e2;
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .game-container {
+            background-color: #ffffff;
+            box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            margin-top: 50px;
+            border-radius: 12px;
+            display: inline-block;
+            text-align: center;
+            width: 350px;
+            background: linear-gradient(145deg, #ffffff, #f1f1f1); /* Subtle gradient */
+        }
+
+        .word-scramble {
+            font-size: 2.5em;
+            color: #FF6F61;
+            margin-bottom: 25px;
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            font-size: 1.5em;
+            padding: 12px;
+            width: 280px;
+            border-radius: 25px;
+            border: 1px solid #ddd;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border: 2px solid #4a90e2;
+        }
+
+        button {
+            font-size: 1.2em;
+            background-color: #4a90e2;
+            color: white;
+            padding: 15px 35px;
+            border: none;
+            cursor: pointer;
+            border-radius: 50px;
+            margin-top: 15px;
+            transition: background-color 0.3s ease, transform 0.2s;
+            width: 250px;
+        }
+
+        button:hover {
+            background-color: #50e3c2;
+            transform: scale(1.05);
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        .message {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #4CAF50;
+            display: none;
+        }
+
+        .message.incorrect {
+            color: #FF5733;
+        }
+
+        /* Back to home button styling */
+        .back-home-button {
+            font-size: 1.1em;
+            color: #4a90e2;
+            margin-top: 30px;
+            text-decoration: none;
+            display: inline-block;
+            padding: 10px 25px;
+            border-radius: 25px;
+            border: 2px solid #4a90e2;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-home-button:hover {
+            background-color: #4a90e2;
+            color: white;
+        }
+
+        /* Add subtle animation to the container */
+        .game-container {
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Word Scramble Game</h1>
+    <div class="game-container">
+        <p class="word-scramble" id="scrambledWord"></p>
+        <input type="text" id="wordInput" placeholder="Enter unscrambled word" />
+        <button onclick="checkAnswer()">Submit</button>
+        <button onclick="showClue()">Clue</button>
+        <p class="message" id="message"></p>
+        <a href="index.html" class="back-home-button">Back to Home</a>
+    </div>
+
+    <script>
+        // Word Scramble Game Logic
+        const words = ['apple', 'banana', 'orange', 'grape', 'kiwi', 'mango', 'strawberry', 'blueberry'];
+        let currentWord = '';
+
+        function scrambleWord(word) {
+            const scrambled = word.split('').sort(() => Math.random() - 0.5).join('');
+            return scrambled;
+        }
+
+        function setNewWord() {
+            currentWord = words[Math.floor(Math.random() * words.length)];
+            const scrambled = scrambleWord(currentWord);
+            document.getElementById('scrambledWord').textContent = scrambled;
+        }
+
+        function checkAnswer() {
+            const userInput = document.getElementById('wordInput').value.toLowerCase().trim();
+            const messageElement = document.getElementById('message');
+
+            if (userInput === currentWord) {
+                messageElement.textContent = 'Congratulations! You guessed the word correctly!';
+                messageElement.style.color = '#4CAF50'; // Green for correct answer
+                messageElement.classList.remove('incorrect');
+            } else {
+                messageElement.textContent = 'Oops! Try again!';
+                messageElement.style.color = '#FF5733'; // Red for incorrect answer
+                messageElement.classList.add('incorrect');
+            }
+
+            messageElement.style.display = 'block';
+
+            // Delay resetting the word after a few seconds
+            setTimeout(() => {
+                setNewWord();
+                document.getElementById('wordInput').value = '';
+                messageElement.style.display = 'none';
+            }, 2000);
+        }
+
+        function showClue() {
+            const clue = `The word starts with: ${currentWord.charAt(0).toUpperCase()}`;
+            alert(clue); // Show clue as an alert with the first letter of the word
+        }
+
+        // Initialize the game with a scrambled word
+        window.onload = setNewWord;
+    </script>
+</body>
+
+</html>

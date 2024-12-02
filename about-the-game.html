@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About the Game</title>
+    <style>
+        /* General body styles */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #6e7bff, #ff6f91);
+            color: #fff;
+            text-align: center;
+            padding: 0;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Header styling */
+        h1 {
+            font-size: 4em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Paragraph text styling */
+        p {
+            font-size: 1.4em;
+            margin-bottom: 40px;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Game description styles */
+        .game-description {
+            margin: 20px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            font-size: 1.2em;
+            text-align: left;
+            width: 80%;
+            max-width: 800px;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .game-description h2 {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+        }
+
+        .game-description p {
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+
+        .game-description:hover {
+            transform: scale(1.02);
+            opacity: 0.9;
+        }
+
+        /* About Us Button Styling */
+        .about-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .about-button {
+            background-color: #fff;
+            color: #ff6f91;
+            font-size: 1.2em;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .about-button:hover {
+            background-color: #ff6f91;
+            color: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Back to home button styling */
+        .back-button {
+            margin-top: 40px;
+            padding: 15px 30px;
+            background-color: #ff6f91;
+            color: white;
+            font-size: 1.2em;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .back-button:hover {
+            background-color: #ff4e77;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Animation for smooth sliding effect */
+        @keyframes slideIn {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .floating-container {
+            animation: slideIn 0.5s ease-out forwards;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- About Us Button in the upper-right corner -->
+    <div class="about-container">
+        <a href="about-us.html">
+            <button class="about-button">About Us</button>
+        </a>
+    </div>
+
+    <!-- Main container with game information -->
+    <div class="floating-container">
+        <h1>About the Games</h1>
+        <p>Here are some of the exciting games we have for you!</p>
+
+        <!-- Memory Game Collection Description -->
+        <div class="game-description">
+            <h2>Memory Game Collection</h2>
+            <p>This game is designed to test and improve your memory skills. It includes a variety of levels with increasing difficulty. The objective is to match pairs of cards, improving your cognitive skills as you progress. The faster you match, the higher your score!</p>
+        </div>
+
+        <!-- Maze Puzzle Game Description -->
+        <div class="game-description">
+            <h2>Maze Puzzle Game</h2>
+            <p>In this game, you need to navigate through a series of challenging mazes. Each maze gets progressively harder, and you must find your way out before time runs out. Use your logic and spatial reasoning to solve puzzles and become a maze master!</p>
+        </div>
+
+        <!-- Word Scramble Game Description -->
+        <div class="game-description">
+            <h2>Word Scramble Game</h2>
+            <p>The Word Scramble game is a fun and challenging word puzzle game. You will be given scrambled letters, and your task is to unscramble them to form a valid word. The game has various levels, ranging from easy to hard, and is perfect for those who love word games.</p>
+        </div>
+    </div>
+
+    <!-- Back to home page link -->
+    <a href="index.html" class="back-button">Back to Home</a>
+
+</body>
+
+</html>

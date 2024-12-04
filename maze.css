@@ -1,0 +1,107 @@
+/* Global page styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #fafafa;
+    text-align: center;
+    padding: 50px;
+    color: #333;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Ensures full viewport height */
+  }
+  
+  h1 {
+    color: #1e3a8a; /* Dark Blue */
+    font-size: 3.5em;
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+  
+  .maze-container {
+    margin-top: 30px;
+    display: inline-block;
+    text-align: left;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+  }
+  
+  /* Center the maze inside the page */
+  .maze {
+    display: grid;
+    grid-template-columns: repeat(10, 30px);
+    grid-template-rows: repeat(10, 30px);
+    gap: 2px;
+    border: 2px solid #4CAF50;
+    margin: 0 auto; /* Centers the maze */
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 8px;
+  }
+  
+  .cell {
+    width: 30px;
+    height: 30px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .wall {
+    background-color: #333;
+  }
+  
+  .start {
+    background-color: #4CAF50; /* Green */
+  }
+  
+  .end {
+    background-color: #FF5733; /* Red */
+  }
+  
+  .player {
+    background-color: #1e40af; /* Blue */
+    border-radius: 50%;
+  }
+  
+  button {
+    font-size: 1.2em;
+    background-color: #1e3a8a;
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #4CAF50;
+  }
+  
+  /* Responsive styling */
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 2.5em;
+    }
+  
+    .maze {
+      grid-template-columns: repeat(8, 30px);
+      grid-template-rows: repeat(8, 30px);
+    }
+  
+    button {
+      font-size: 1em;
+      padding: 12px 24px;
+    }
+  }
+  
+  /* Styling for when the player wins */
+  .won-message {
+    font-size: 2em;
+    color: #4CAF50;
+    margin-top: 20px;
+  }
+  

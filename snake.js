@@ -7,44 +7,54 @@ let highScoreElem = document.getElementById('highScore');
 let grid = 20;
 let count = 0;
 let score = 0;
-let highScore = 0;  // High score variable
+let highScore = 0;
 
 let snake = [{x: 160, y: 160}];
 let direction = 'RIGHT';
 let food = {x: 0, y: 0};
 
-// Difficulty settings (in terms of game update speed)
-let difficulty = 'medium'; // Default difficulty
-let speed = 4; // Default speed for medium difficulty
+// Difficulty settings
+let difficulty = 'medium';
+let speed = 4;
 
-// Set the difficulty level
-function setDifficulty(level) {
+// Game state
+let isPaused = false;
+
+// Set difficulty
+function adjustDifficulty(level) {
     difficulty = level;
     if (difficulty === 'easy') {
         speed = 6;
     } else if (difficulty === 'hard') {
-        speed = 2;
+        speed = 3;
     } else {
-        speed = 4; // medium
+        speed = 5; // medium
     }
 }
 
-// Generate food at a random position
+// Pause game
+function togglePause() {
+    isPaused = !isPaused;
+    document.getElementById('pauseButton').textContent = isPaused ? 'Resume' : 'Pause';
+    if (!isPaused) {
+        requestAnimationFrame(gameLoop);
+    }
+}
+
+// Generate food at random position
 function generateFood() {
     food.x = Math.floor(Math.random() * (canvas.width / grid)) * grid;
     food.y = Math.floor(Math.random() * (canvas.height / grid)) * grid;
 }
 
-// Update the snake's position
+// Update snake
 function update() {
-    count++;
+    if (isPaused) return;
 
-    if (count < speed) {
-        return;
-    }
+    count++;
+    if (count < speed) return;
     count = 0;
 
-    // Move the snake
     let head = {x: snake[0].x, y: snake[0].y};
 
     if (direction === 'LEFT') head.x -= grid;
@@ -52,10 +62,8 @@ function update() {
     if (direction === 'UP') head.y -= grid;
     if (direction === 'DOWN') head.y += grid;
 
-    // Add new head to the snake array
     snake.unshift(head);
 
-    // Check if snake eats food
     if (head.x === food.x && head.y === food.y) {
         score++;
         scoreElem.textContent = 'Score: ' + score;
@@ -64,48 +72,46 @@ function update() {
         snake.pop();
     }
 
-    // Game over conditions
-    if (head.x < 0 || head.x >= canvas.width || head.y < 0 || head.y >= canvas.height || collision(head)) {
+    if (
+        head.x < 0 || 
+        head.x >= canvas.width || 
+        head.y < 0 || 
+        head.y >= canvas.height || 
+        collision(head)
+    ) {
         resetGame();
     }
 
-    // Update high score
     if (score > highScore) {
         highScore = score;
         highScoreElem.textContent = 'High Score: ' + highScore;
     }
 }
 
-// Draw everything on the canvas
+
+
+// Draw the canvas
 function draw() {
+    if (isPaused) return;
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Draw the black border around the canvas
-    ctx.strokeStyle = 'black';  // Set the border color to black
-    ctx.lineWidth = 5;          // Border width (can adjust as needed)
-    ctx.strokeRect(0, 0, canvas.width, canvas.height); // Draw the border
-
-    // Draw snake
     snake.forEach((segment, index) => {
         ctx.fillStyle = index === 0 ? 'green' : 'lightgreen';
         ctx.fillRect(segment.x, segment.y, grid, grid);
     });
 
-    // Draw food
     ctx.fillStyle = 'red';
     ctx.fillRect(food.x, food.y, grid, grid);
 }
 
-// Detect collision with itself
+// Collision detection
 function collision(head) {
     return snake.some((segment, index) => index !== 0 && segment.x === head.x && segment.y === head.y);
 }
 
 // Reset the game
 function resetGame() {
-    if (score > highScore) {
-        highScore = score;
-    }
     score = 0;
     scoreElem.textContent = 'Score: ' + score;
     snake = [{x: 160, y: 160}];
@@ -113,27 +119,19 @@ function resetGame() {
     generateFood();
 }
 
-// Handle keyboard input for snake movement
+// Keyboard input
 document.addEventListener('keydown', function(event) {
-    if (event.key === 'ArrowUp' && direction !== 'DOWN') {
-        direction = 'UP';
-    }
-    if (event.key === 'ArrowDown' && direction !== 'UP') {
-        direction = 'DOWN';
-    }
-    if (event.key === 'ArrowLeft' && direction !== 'RIGHT') {
-        direction = 'LEFT';
-    }
-    if (event.key === 'ArrowRight' && direction !== 'LEFT') {
-        direction = 'RIGHT';
-    }
+    if (event.key === 'ArrowUp' && direction !== 'DOWN') direction = 'UP';
+    if (event.key === 'ArrowDown' && direction !== 'UP') direction = 'DOWN';
+    if (event.key === 'ArrowLeft' && direction !== 'RIGHT') direction = 'LEFT';
+    if (event.key === 'ArrowRight' && direction !== 'LEFT') direction = 'RIGHT';
 });
 
 // Game loop
 function gameLoop() {
     update();
     draw();
-    requestAnimationFrame(gameLoop);
+    if (!isPaused) requestAnimationFrame(gameLoop);
 }
 
 // Start the game

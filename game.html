@@ -5,118 +5,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Memory Game</title>
-  <style>
-    /* Global styles for the page */
-    body {
-      font-family: 'Arial', sans-serif;
-      background-color: #f7f7f7;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      flex-direction: column;
-    }
-
-    /* Styling for the headline */
-    #headline {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-
-    #headline h1 {
-      font-size: 3.5em;
-      color: #2a9d8f; /* Teal */
-      margin-bottom: 10px;
-      font-weight: bold;
-    }
-
-    #headline p {
-      font-size: 1.5em;
-      color: #333;
-      margin-bottom: 20px;
-    }
-
-    /* Back button styling */
-    .back-button {
-      font-size: 1.2em;
-      padding: 12px 24px;
-      margin: 20px;
-      background-color: #2a9d8f;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      text-decoration: none;
-      transition: background-color 0.3s ease;
-    }
-
-    .back-button:hover {
-      background-color: #264653;
-    }
-
-    /* Memory board styling */
-    div#memory_board {
-      background-color: #ffffff;
-      border: 3px solid #50CB86; /* Light green */
-      width: 800px;
-      height: 540px;
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: 10px;
-      margin: 0 auto;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    }
-
-    /* Styling for each memory tile */
-    div#memory_board > div {
-      background-image: url('http://bit.ly/2x07Tf0');
-      border: 2px solid #F1EA65; /* Light yellow */
-      width: 71px;
-      height: 71px;
-      font-size: 48px;
-      color: #333;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: #e9ecef;
-      border-radius: 8px;
-      transition: background-color 0.3s ease, transform 0.2s ease;
-    }
-
-    /* Hover effect for the tiles */
-    div#memory_board > div:hover {
-      background-color: #d1d8e0;
-      transform: scale(1.05);
-    }
-
-    /* Styling for flipped tiles */
-    div#memory_board > div.flipped {
-      background-color: #ffffff;
-      color: #333;
-      font-weight: bold;
-    }
-
-    /* Responsive design */
-    @media (max-width: 768px) {
-      div#memory_board {
-        width: 100%;
-        max-width: 600px;
-      }
-
-      .back-button {
-        width: 100%;
-      }
-    }
-  </style>
+  <link rel= "stylesheet" href="game.css">
+ 
 </head>
 
 <body>
-  <!-- Header Section -->
+  <!-- Header Section --> 
   <div id="headline">
     <h1>Memory Game!</h1>
     <p>Match the pairs and have fun!</p>

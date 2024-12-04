@@ -1,0 +1,46 @@
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #87CEEB; /* Light blue background (sky) */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Make the body take up the full viewport height */
+}
+
+canvas {
+    display: block;
+    background-color: #98FB98; /* Light green background (grass) */
+    margin: 0;
+    /* Ensure canvas is centered within the body */
+}
+
+.game-over {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 36px;
+    color: #ff6347; /* Tomato color */
+    font-weight: bold;
+    display: none;
+}
+
+.home-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 10px 20px;
+    background-color: #008CBA; /* Blue background */
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.home-button:hover {
+    background-color: #005f6b; /* Darker blue on hover */
+}

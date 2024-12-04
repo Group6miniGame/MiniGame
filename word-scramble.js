@@ -1,6 +1,6 @@
 
 // Word Scramble Game Logic
-const words = ['apple', 'banana', 'orange', 'grape', 'kiwi', 'mango', 'strawberry', 'blueberry'];
+const words = ['computer', 'rj45', 'javascript', 'website', '', 'technology', 'monitor', 'motherboard'];
 let currentWord = '';
 
 function scrambleWord(word) {

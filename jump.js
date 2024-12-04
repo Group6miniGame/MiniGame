@@ -1,4 +1,3 @@
-// Game constants and variables
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
@@ -6,29 +5,27 @@ const GRAVITY = 0.5;
 const JUMP_STRENGTH = -10;
 const DRAGON_WIDTH = 60;
 const DRAGON_HEIGHT = 60;
-const FLOWER_WIDTH = 30;
-const FLOWER_HEIGHT = 50;
+const CACTUS_WIDTH = 30;
+const CACTUS_HEIGHT = 50;
 let isJumping = false;
 let jumpSpeed = 0;
 let dragonX = 50;
 let dragonY = canvas.height - DRAGON_HEIGHT - 20;
-let flowerX = canvas.width;
-let flowerY = canvas.height - FLOWER_HEIGHT - 20;
+let cactusX = canvas.width;
+let cactusY = canvas.height - CACTUS_HEIGHT - 20;
 let score = 0;
 let gameOver = false;
 
-// Flower speed and acceleration
-let flowerSpeed = 5; // Initial speed for the flower
+let cactusSpeed = 5;
 
-// Draw the dragon with a more polished design (simple round dragon)
+// Draw the dragon
 function drawDragon() {
-    ctx.fillStyle = "#32CD32"; // Dragon color (green)
+    ctx.fillStyle = "#32CD32";
     ctx.beginPath();
     ctx.arc(dragonX + DRAGON_WIDTH / 2, dragonY + DRAGON_HEIGHT / 2, DRAGON_WIDTH / 2, 0, Math.PI * 2);
     ctx.fill();
     ctx.closePath();
 
-    // Add simple eyes to the dragon
     ctx.fillStyle = "white";
     ctx.beginPath();
     ctx.arc(dragonX + DRAGON_WIDTH / 3, dragonY + DRAGON_HEIGHT / 3, 10, 0, Math.PI * 2);
@@ -36,7 +33,6 @@ function drawDragon() {
     ctx.fill();
     ctx.closePath();
 
-    // Add simple pupils to the eyes
     ctx.fillStyle = "black";
     ctx.beginPath();
     ctx.arc(dragonX + DRAGON_WIDTH / 3, dragonY + DRAGON_HEIGHT / 3, 5, 0, Math.PI * 2);
@@ -45,30 +41,24 @@ function drawDragon() {
     ctx.closePath();
 }
 
-// Draw the flower with improved design (simpler and more colorful)
-function drawFlower() {
-    ctx.fillStyle = "#8A2BE2"; // Flower color (purple)
-    ctx.fillRect(flowerX, flowerY, FLOWER_WIDTH, FLOWER_HEIGHT);
+// Draw the cactus
+function drawCactus() {
+    ctx.fillStyle = "#228B22";
+    ctx.fillRect(cactusX, cactusY, CACTUS_WIDTH, CACTUS_HEIGHT);
 
-    // Draw flower petals (for aesthetic effect)
-    ctx.fillStyle = "#FFD700";
-    ctx.beginPath();
-    ctx.arc(flowerX + FLOWER_WIDTH / 2, flowerY + FLOWER_HEIGHT / 3, 10, 0, Math.PI * 2);
-    ctx.arc(flowerX + FLOWER_WIDTH / 4, flowerY + 2 * FLOWER_HEIGHT / 3, 10, 0, Math.PI * 2);
-    ctx.arc(flowerX + 3 * FLOWER_WIDTH / 4, flowerY + 2 * FLOWER_HEIGHT / 3, 10, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.closePath();
+    ctx.fillStyle = "#8B4513";
+    ctx.fillRect(cactusX + CACTUS_WIDTH / 4, cactusY - 10, CACTUS_WIDTH / 2, 10);
 }
 
 // Draw the score
 function drawScore() {
     const scoreText = "Score: " + score;
-    ctx.fillStyle = "#FFFFFF"; // White score text
+    ctx.fillStyle = "#FFFFFF";
     ctx.font = "30px Arial";
     ctx.fillText(scoreText, 20, 40);
 }
 
-// Handle the dragon's jumping logic
+// Handle jumping logic
 function jump() {
     if (isJumping) {
         jumpSpeed += GRAVITY;
@@ -82,74 +72,77 @@ function jump() {
     }
 }
 
-// Move the flower and check for collision with the dragon
-function moveFlower() {
-    flowerX -= flowerSpeed; // Move flower to the left based on the current speed
+// Move the cactus and handle collision
+function moveCactus() {
+    cactusX -= cactusSpeed;
 
-    if (flowerX + FLOWER_WIDTH < 0) {
-        flowerX = canvas.width;
-        flowerY = canvas.height - FLOWER_HEIGHT - 20; // Reset flower's position
-        score++; // Increase score when flower passes
-        adjustSpeed(); // Adjust flower speed based on score
+    if (cactusX + CACTUS_WIDTH < 0) {
+        cactusX = canvas.width;
+        cactusY = canvas.height - CACTUS_HEIGHT - 20;
+        score++;
+        adjustSpeed();
     }
 
-    // Check for collision between dragon and flower
     if (
-        dragonX < flowerX + FLOWER_WIDTH &&
-        dragonX + DRAGON_WIDTH > flowerX &&
-        dragonY < flowerY + FLOWER_HEIGHT &&
-        dragonY + DRAGON_HEIGHT > flowerY
+        dragonX < cactusX + CACTUS_WIDTH &&
+        dragonX + DRAGON_WIDTH > cactusX &&
+        dragonY < cactusY + CACTUS_HEIGHT &&
+        dragonY + DRAGON_HEIGHT > cactusY
     ) {
         gameOver = true;
         document.getElementById("gameOverMessage").style.display = "block";
-        document.getElementById("finalScore").innerText = score; // Show final score
+        document.getElementById("finalScore").innerText = score;
     }
 }
 
-// Adjust the speed of the flower based on the score
+// Adjust speed based on score
 function adjustSpeed() {
     if (score >= 20) {
-        flowerSpeed = 12; // Increase speed to 12 when the score reaches 20
+        cactusSpeed = 12;
     } else if (score >= 5) {
-        flowerSpeed = 8; // Increase speed to 8 when the score reaches 5
+        cactusSpeed = 8;
     }
 }
 
-// Game loop
+// Main game loop
 function gameLoop() {
-    if (gameOver) return; // Stop the game if it's over
+    if (gameOver) return;
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawDragon();
-    drawFlower();
+    drawCactus();
     drawScore();
     jump();
-    moveFlower();
+    moveCactus();
 
-    requestAnimationFrame(gameLoop); // Repeat the game loop
+    requestAnimationFrame(gameLoop);
 }
 
-// Listen for the spacebar to make the dragon jump
+// Event listener for jumping (Spacebar)
 document.addEventListener("keydown", (e) => {
     if (e.key === " " && !isJumping && !gameOver) {
         isJumping = true;
-        jumpSpeed = JUMP_STRENGTH; // Set the initial jump speed
+        jumpSpeed = JUMP_STRENGTH;
+    }
+
+    // Event listener to restart game when Spacebar is pressed and game is over
+    if (e.key === " " && gameOver) {
+        restartGame();
     }
 });
 
-// Restart the game after game over
+// Restart the game
 function restartGame() {
     score = 0;
-    flowerSpeed = 5; // Reset flower speed
-    flowerX = canvas.width;
-    flowerY = canvas.height - FLOWER_HEIGHT - 20;
+    cactusSpeed = 5;
+    cactusX = canvas.width;
+    cactusY = canvas.height - CACTUS_HEIGHT - 20;
     dragonY = canvas.height - DRAGON_HEIGHT - 20;
     isJumping = false;
     jumpSpeed = 0;
     gameOver = false;
     document.getElementById("gameOverMessage").style.display = "none";
-    gameLoop(); // Start the game loop
+    gameLoop();
 }
 
-// Start the game loop when the page loads
 gameLoop();

@@ -4,33 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dragon Jump Game</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            background-color: #87CEEB; /* Light blue background (sky) */
-        }
-        canvas {
-            display: block;
-            background-color: #98FB98; /* Light green background (grass) */
-            margin: 0 auto;
-        }
-        .game-over {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 36px;
-            color: #ff6347; /* Tomato color */
-            font-weight: bold;
-            display: none;
-        }
-    </style>
+    <link rel="stylesheet" href="jump.css">
+
 </head>
 <body>
+    <button class="home-button" onclick="goHome()">Home</button>
     <canvas id="gameCanvas" width="800" height="400"></canvas>
-    <div id="gameOverMessage" class="game-over">Game Over! Press F5 to restart</div>
+    <div id="gameOverMessage" class="game-over">Game Over! Press Space to restart</div>
     <script src="jump.js"></script>
+    <script>
+        function goHome() {
+            window.location.href = "index.html"; // Redirect to index.html
+        }
+    </script>
 </body>
 </html>

@@ -1,22 +1,43 @@
 body {
     font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
     margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background-color: #f4f4f4;
+    height: 100vh;
+    justify-content: center;
 }
 
 canvas {
     background-color: #000;
+    border: 5px solid white;
 }
 
-#score {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    color: #fff;
-    font-size: 20px;
+#score, #highScore {
+    color: white;
+    margin: 10px;
+    font-size: 18px;
 }
 
+#controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+button, select {
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #333;
+    color: white;
+}
+
+button:hover, select:hover {
+    background-color: #555;
+}

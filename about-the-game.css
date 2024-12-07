@@ -1,0 +1,140 @@
+/* Reset some default browser styles */
+body, h1, h2, h3, p, ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+/* Navigation Bar */
+.about-game-nav ul {
+    display: flex;
+    justify-content: center;
+    background-color: #333;
+    padding: 15px;
+}
+
+.about-game-nav li {
+    list-style-type: none;
+    margin: 0 20px;
+}
+
+.about-game-nav a {
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px;
+}
+
+.about-game-nav a:hover {
+    background-color: #575757;
+    border-radius: 5px;
+}
+
+/* Main Content Styling */
+.about-game-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.about-game-container h1 {
+    font-size: 2.8rem;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.about-game-container p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+/* Game Description Section */
+.game-description-section {
+    display: flex;
+    margin-bottom: 30px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.game-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.game-text {
+    flex: 1;
+    padding: 20px;
+}
+
+.game-image {
+    width: 250px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: transform 0.3s;
+}
+
+.game-image:hover {
+    transform: scale(1.1);
+}
+
+.game-text h2 {
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.game-text h3 {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+}
+
+.game-text ul {
+    margin-bottom: 10px;
+}
+
+.game-text li {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+}
+
+/* Button Section */
+.home-button-section {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.btn {
+    display: inline-block;
+    background-color: #333;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+.btn:hover {
+    background-color: #575757;
+}
+.game-image {
+    width: 200px; /* Set width to 200px */
+    height: 200px; /* Set height to 200px */
+    object-fit: cover; /* Ensures the image is not distorted */
+    border-radius: 8px; /* Optional: adds rounded corners */
+    transition: transform 0.3s; /* Optional: for smooth hover effect */
+}
+
+.game-image:hover {
+    transform: scale(1.1); /* Optional: adds a zoom effect on hover */
+}

@@ -94,3 +94,16 @@ const maze = [
   window.onload = () => {
     drawMaze();
   };
+  // Function to play sound
+function playSound(soundFile) {
+  const audio = new Audio(soundFile);
+  audio.play();
+}
+
+// Example: When the player clicks to make a move or button interaction
+// You can call playSound() when a player interacts with the game
+const mazeElement = document.getElementById('maze');
+mazeElement.addEventListener('click', () => {
+  // Play a sound when the maze is clicked (this could represent a move or other action)
+  playSound('sounds/background.mp3');  // Path to your click sound
+});

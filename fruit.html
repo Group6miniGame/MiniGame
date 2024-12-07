@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Fruits Game</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.3/themes/smoothness/jquery-ui.css">
+</head>
+<body>
+    <header id="heading">Fruit Slice!</header>
+    <audio id="bgmusic" loop autoplay>
+        <source src='audio/no-story-70330.mp3' type="audio/filetype">
+    </audio>
+    <div id="container">
+        <div id="score">
+            Score: <span id="scorevalue">0</span>
+        </div>
+        <div id="trialsleft">
+            
+        </div>
+        <div id="fruitContainer">
+            <img id="fruit1" class="fruit" >
+        </div>
+        <div id="instruction">Catch the Fruits!</div>
+        
+        <div id="startreset">Start Game</div>
+        <div id="gameover"></div>
+    </div>
+</body>
+<audio id="slicesound">
+    <source src="audio/knife slice sound.mp3"></source>
+</audio>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+<script src="logic.js"></script>
+</html>

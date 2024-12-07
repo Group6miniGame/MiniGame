@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catch the Falling Ball - Press Start</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #ececec;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+            color: #333;
+        }
+
+        .container {
+            text-align: center;
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 400px;
+        }
+
+        h1 {
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        #startButton {
+            font-size: 20px;
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        #startButton:hover {
+            background-color: #218838;
+        }
+
+        img {
+            width: 100%;
+            max-width: 200px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>O Jump!</h1>
+        <!-- Add an image here -->
+        <img src="https://i.pinimg.com/736x/7c/71/9a/7c719a21f3071ec8503bb76bb3612340.jpg" alt="Game Image">
+        <p>Press the "Start" button to begin playing.</p>
+        <button id="startButton">Start Game</button>
+    </div>
+
+    <script>
+        // Redirect to game page when "Start Game" is clicked
+        document.getElementById("startButton").addEventListener("click", function() {
+            window.location.href = "jump.html"; // Redirect to the game page
+        });
+    </script>
+</body>
+</html>
